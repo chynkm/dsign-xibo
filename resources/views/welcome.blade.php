@@ -1,100 +1,93 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Modify content</div>
+                <div class="card-body">
+                    <form id="menu_content_form" action="{{ route('saveMenu') }}" onsubmit="return false;">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" value="FAJITAS" name="left_title" class="text-uppercase form-control" placeholder="first-title">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" value="BURRITOS" name="center_title" class="text-uppercase form-control" placeholder="center-title">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" value="TACOS" name="right_title" class="text-uppercase form-control" placeholder="right-title">
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline1" name="image" value="img/burritos.png" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline1">
+                                        <img src="img/burritos.png" class="img-fluid" alt="background" width="50%">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline2" name="image" value="img/fajitas.png" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioInline2">
+                                        <img src="img/fajitas.png" class="img-fluid" alt="background" width="50%">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+                    </form>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="card-footer">
+                    <button type="button"
+                        class="btn btn-primary"
+                        id="save_menu_content"
+                        data-loading-text="<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Processing your request">
+                        Save</button>
+                    <span class="text-success" id="success_message"></span>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            </div>
+            <div class="card mt-5">
+                <div class="card-header">Layout preview</div>
+                <div class="card-body">
+                    <img src="img/bg_screen01_default.png" class="img-fluid" id="menu_layout_preview" alt="background">
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+    APP.design.init();
+});
+
+var APP = APP || {};
+
+APP.design = {
+    init: function() {
+        this.saveContent();
+    },
+
+    saveContent: function() {
+        $('#save_menu_content').click(function(e) {
+            e.preventDefault();
+            $('#save_menu_content').data('original-text', $('#save_menu_content').html());
+            $('#save_menu_content').html($('#save_menu_content').data('loading-text')).prop('disabled', true);
+
+            $.post($('#menu_content_form').attr('action'), $('#menu_content_form').serialize())
+                .done(function(data) {
+                    if(data.status) {
+                        $('#save_menu_content').html($('#save_menu_content').data('original-text'))
+                            .prop('disabled', false);
+                        $('#success_message').html('Changes saved successfully');
+                        setTimeout(function(){ $('#success_message').empty(); }, 5000);
+                        $('#menu_layout_preview').attr('src', 'img/bg_screen01_default.png?'+(new Date()).getTime());
+                    }
+                });
+        });
+    },
+};
+</script>
+@endsection
