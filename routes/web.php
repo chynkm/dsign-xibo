@@ -22,8 +22,7 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::match(['get', 'post'], '/save-menu', function(Request $request)
-{
+Route::match(['get', 'post'], '/save-menu', function(Request $request) {
     $img = Image::make(public_path('img/bg_screen01.png'));
 
     $leftTitle = $request->left_title ?? 'FAJITAS';
@@ -55,3 +54,15 @@ Route::match(['get', 'post'], '/save-menu', function(Request $request)
     $img->save(public_path('img/bg_screen01_default.png'));
     return response()->json(['status' => true]);
 })->name('saveMenu');
+
+Route::get('/player', function(Request $request) {
+    return view('player');
+})->name('player');
+
+Route::get('/get-menu', function(Request $request) {
+    return response()->json([
+        'status' => true,
+        'image' => 'img/bg_screen01_default.png',
+        'video' => 'video/ch.mp4',
+    ]);
+})->name('getMenu');

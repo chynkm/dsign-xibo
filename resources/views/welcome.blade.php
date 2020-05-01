@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-md-4 mt-3">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="image" value="img/fajitas.png" class="custom-control-input">
+                                    <input type="radio" id="customRadioInline2" name="image" value="img/fajitas.png" class="custom-control-input" checked>
                                     <label class="custom-control-label" for="customRadioInline2">
                                         <img src="img/fajitas.png" class="img-fluid" alt="background" width="50%">
                                     </label>
