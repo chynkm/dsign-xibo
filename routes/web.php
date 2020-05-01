@@ -51,7 +51,7 @@ Route::match(['get', 'post'], '/save-menu', function(Request $request) {
 
     $image = $request->image ?? 'img/fajitas.png';
     $img->insert(public_path($image), 'top-left', 15, 165);
-    $img->save(public_path('img/bg_screen01_default.png'));
+    $img->save(public_path('img/bg_screen01_output.png'));
     return response()->json(['status' => true]);
 })->name('saveMenu');
 
@@ -62,7 +62,7 @@ Route::get('/player', function(Request $request) {
 Route::get('/get-menu', function(Request $request) {
     return response()->json([
         'status' => true,
-        'image' => 'img/bg_screen01_default.png',
-        'video' => 'video/ch.mp4',
+        'imagePath' => 'img/bg_screen01_output.png?ver='.uniqid(),
+        'videoPath' => 'video/ch.mp4',
     ]);
 })->name('getMenu');

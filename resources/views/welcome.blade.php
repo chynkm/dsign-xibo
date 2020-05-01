@@ -46,12 +46,13 @@
                         data-loading-text="<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Processing your request">
                         Save</button>
                     <span class="text-success" id="success_message"></span>
+                    <a class="btn btn-primary float-right" target="_blank" href="{{ route('player') }}" role="button">Player preview</a>
                 </div>
             </div>
             <div class="card mt-5">
                 <div class="card-header">Layout preview</div>
                 <div class="card-body">
-                    <img src="img/bg_screen01_default.png" class="img-fluid" id="menu_layout_preview" alt="background">
+                    <img src="img/bg_screen01_output.png" class="img-fluid" id="menu_layout_preview" alt="background">
                 </div>
             </div>
         </div>
@@ -83,7 +84,7 @@ APP.design = {
                             .prop('disabled', false);
                         $('#success_message').html('Changes saved successfully');
                         setTimeout(function(){ $('#success_message').empty(); }, 5000);
-                        $('#menu_layout_preview').attr('src', 'img/bg_screen01_default.png?'+(new Date()).getTime());
+                        $('#menu_layout_preview').attr('src', 'img/bg_screen01_output.png?'+(new Date()).getTime());
                     }
                 });
         });
