@@ -66,3 +66,57 @@ Route::get('/get-menu', function(Request $request) {
         'videoPath' => 'video/ch.mp4',
     ]);
 })->name('getMenu');
+
+Route::get('/xibo', function(Request $request) {
+    $provider = new \Xibo\OAuth2\Client\Provider\Xibo([
+        'clientId' => env('XIBO_CLIENT_ID'),
+        'clientSecret' => env('XIBO_CLIENT_SECRET'),
+        'redirectUri' => '',
+        'baseUrl' => env('XIBO_BASE_URL'),
+    ]);
+
+    $entityProvider = new \Xibo\OAuth2\Client\Provider\XiboEntityProvider($provider);
+    $layout = (new \Xibo\OAuth2\Client\Entity\XiboLayout($entityProvider))->getById(9);
+    $layout = (new \Xibo\OAuth2\Client\Entity\XiboLayout($entityProvider))->get(['layoutId' => 10, 'embed' => 'regions, playlists, widgets, campaigns, permissions']);
+
+    // Example v2.2 usage
+    // $entityProvider->get('/layout', ['layoutId' => $layout->layoutId]);
+    //
+    // copy layout
+    // $layout->copy($name, $description, $copyMediaFiles);
+    //
+    // create region; a playlist is autmatically created
+    // $layout->createRegion($width, $height, $top, $left);
+    //
+    //
+    // create library - check whether omitted; if using copy layout with mediafiles?
+    // create custom name => as to avoid overlap and save filename for display to a common field.
+    // (new Xibo\OAuth2\Client\Entity\XiboLibrary($entityProvider))->create($name, $fileLocation);
+    // media id
+    // $media->mediaId
+    // where 9 is the resolutionID
+    // $layout->edit($layout->layout, $layout->description, null, null, null, $media->mediaId, null, 9);
+    // [or] in version 2.2
+    // $entityProvider->put('/layout/background/'.$layout->layoutId, ['backgroundImageId' => $media->mediaId]);
+    //
+    $layout->createRegion(1920, 1080, 0, 0);
+
+    // dd('achu');
+    dd($layout);
+
+    $background = public_path('img/13219.jpg');
+    $media = (new Xibo\OAuth2\Client\Entity\XiboLibrary($entityProvider))->create(basename($background), $background);
+
+    $playlist = $entityProvider->post('/playlist', ['name' => 'adada', 'isDynamic' => 0]);
+
+    // createRegion($width, $height, $top, $left)
+
+    $region = new \Xibo\OAuth2\Client\Entity\XiboRegion();
+    $region->regionId = 26;
+
+    dd($layout);
+
+    // 26 - video
+    // 27 - background
+
+})->name('xibo');
