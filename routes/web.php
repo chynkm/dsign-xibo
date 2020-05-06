@@ -82,6 +82,19 @@ Route::get('/xibo', function(Request $request) {
     // Example v2.2 usage
     // $entityProvider->get('/layout', ['layoutId' => $layout->layoutId]);
     //
+    // create layout
+    // (new \Xibo\OAuth2\Client\Entity\XiboLayout($entityProvider))->create($name, $description, $layoutId, $resolutionId);
+    //
+    // $layout = (new \Xibo\OAuth2\Client\Entity\XiboLayout($entityProvider))->create('html trial 1', null, 0, 9);
+    // will create region and playlist
+    // $region = $layout->regions[0]
+    // $playlist = $region->playlists[0]
+    //
+    // create embed widget
+    // $embedHtml = '<html><body><center><h1>ACHU</h1></center></body><html>';
+    // $embedWidget = (new \Xibo\OAuth2\Client\Entity\XiboEmbedded($entityProvider))->create($name, $duration, $useDuration, $transparency, $scaleContent, $embedHtml, $embedScript, $embedStyle, $playlistId)
+    // $embedWidget = (new \Xibo\OAuth2\Client\Entity\XiboEmbedded($entityProvider))->create('source html', 0, 0, 1, 1, $embedHtml, null, null, $playlist['playlistId']);
+    //
     // copy layout
     // $layout->copy($name, $description, $copyMediaFiles);
     //
@@ -97,9 +110,15 @@ Route::get('/xibo', function(Request $request) {
     // where 9 is the resolutionID
     // $layout->edit($layout->layout, $layout->description, null, null, null, $media->mediaId, null, 9);
     // [or] in version 2.2
-    // $entityProvider->put('/layout/background/'.$layout->layoutId, ['backgroundImageId' => $media->mediaId]);
+    // $entityProvider->put('/layout/background/'.$layout->layoutId, [
+    //  'backgroundImageId' => $media->mediaId,
+    //  'backgroundColor' => null,
+    //  'backgroundzIndex' => 0,
+    // ]);
     //
     $layout->createRegion(1920, 1080, 0, 0);
+
+    $entityProvider->get('/layout', ['layoutId' => 10, 'embed' => 'regions, playlists, widgets, campaigns, permissions']);
 
     // dd('achu');
     dd($layout);
