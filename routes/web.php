@@ -105,6 +105,7 @@ Route::get('/xibo', function(Request $request) {
     // create library - check whether omitted; if using copy layout with mediafiles?
     // create custom name => as to avoid overlap and save filename for display to a common field.
     // (new Xibo\OAuth2\Client\Entity\XiboLibrary($entityProvider))->create($name, $fileLocation);
+    //
     // media id
     // $media->mediaId
     // where 9 is the resolutionID
@@ -120,9 +121,6 @@ Route::get('/xibo', function(Request $request) {
 
     $entityProvider->get('/layout', ['layoutId' => 10, 'embed' => 'regions, playlists, widgets, campaigns, permissions']);
 
-    // dd('achu');
-    dd($layout);
-
     $background = public_path('img/13219.jpg');
     $media = (new Xibo\OAuth2\Client\Entity\XiboLibrary($entityProvider))->create(basename($background), $background);
 
@@ -133,9 +131,26 @@ Route::get('/xibo', function(Request $request) {
     $region = new \Xibo\OAuth2\Client\Entity\XiboRegion();
     $region->regionId = 26;
 
-    dd($layout);
+    // get all displays
+    // fetch using license
+    // make sure to rename the display to the clients name with display-number suffix
+    // save to clients information
+    $displays = (new Xibo\OAuth2\Client\Entity\XiboDisplay($entityProvider))->get();
+    $displayId = 1;
+    $authorizeDisplay = $entityProvider->put('/display/authorise/'.$displayId);
 
-    // 26 - video
-    // 27 - background
+    $displayGroup = (new Xibo\OAuth2\Client\Entity\XiboDisplayGroup($entityProvider))->create('ubuntu', null, 0, null);
+    $displayGroup->assignDisplay($displayId);
+
+
+    // if there are multiple layouts - use campaign
+    $campaign = (new Xibo\OAuth2\Client\Entity\XiboCampaign($entityProvider))->create('ubuntu campaign');
+    $campaign->assignLayout(3);
+
+    // createEventLayout($fromDt, $toDt, $campaignId, $displaygroupIds, $dayPartId, $recurrenceType, $recurrenceDetail, $recurrenceRange, $displayOrder, $isPriority)
+    // if there are multiple display - use display group;
+    // if there are multiple layouts - use campaign; for scheduling
+    // $schedule = (new Xibo\OAuth2\Client\Entity\XiboSchedule($entityProvider))->createEventLayout('2020-05-16 13:25:00', '2020-05-17 13:25:00', 3, [2], 2, null, 0, null, 1, 0);
+    $schedule = (new Xibo\OAuth2\Client\Entity\XiboSchedule($entityProvider))->createEventLayout('2020-05-16 13:25:00', '2020-05-17 13:25:00', 3, [1], 1, null, 0, null, 1, 0);
 
 })->name('xibo');
