@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Modify content</div>
                 <div class="card-body">
-                    <form id="menu_content_form" action="{{ route('saveMenu') }}" onsubmit="return false;">
+                    <form id="menu_content_form" action="" onsubmit="return false;">
                         @csrf
                         <div class="row">
                             <div class="col-md-4">
@@ -19,24 +19,7 @@
                             <div class="col-md-4">
                                 <input type="text" value="TACOS" name="right_title" class="text-uppercase form-control" placeholder="right-title">
                             </div>
-                            <div class="col-md-4 mt-3">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline1" name="image" value="img/burritos.png" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioInline1">
-                                        <img src="img/burritos.png" class="img-fluid" alt="background" width="50%">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mt-3">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="image" value="img/fajitas.png" class="custom-control-input" checked>
-                                    <label class="custom-control-label" for="customRadioInline2">
-                                        <img src="img/fajitas.png" class="img-fluid" alt="background" width="50%">
-                                    </label>
-                                </div>
-                            </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="card-footer">
@@ -46,13 +29,6 @@
                         data-loading-text="<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Processing your request">
                         Save</button>
                     <span class="text-success" id="success_message"></span>
-                    <a class="btn btn-primary float-right" target="_blank" href="{{ route('player') }}" role="button">Player preview</a>
-                </div>
-            </div>
-            <div class="card mt-5">
-                <div class="card-header">Layout preview</div>
-                <div class="card-body">
-                    <img src="img/bg_screen01_output.png" class="img-fluid" id="menu_layout_preview" alt="background">
                 </div>
             </div>
         </div>
