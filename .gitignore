@@ -12,7 +12,5 @@ npm-debug.log
 yarn-error.log
 .DS_store
 docker
-/public/img
 /public/font
-/public/video
 /public/db.php
