@@ -20,7 +20,15 @@ $videos = ['sunrise.mp4', 'water.mp4',];
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Admin section</div>
+                <div class="card-header">
+                    Admin section
+                    <div class="float-right">
+                        <button type="button" class="btn btn-primary"><span class="oi oi-plus"></span> Category</button>
+                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Image</button>
+                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Product</button>
+                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Video</button>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -64,6 +72,7 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                                                 </div>
                                             </div>
                                         </div>
+                                        <hr>
                                         Images<br/>
                                         @foreach ($images as $key => $image)
                                         <div class="form-check form-check-inline">
@@ -73,7 +82,7 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                                             </label>
                                         </div>
                                         @endforeach
-                                        <br/>
+                                        <hr>
                                         Videos<br/>
                                         @foreach ($videos as $key => $video)
                                         <div class="form-check form-check-inline">
