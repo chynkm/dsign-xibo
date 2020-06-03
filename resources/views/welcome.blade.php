@@ -25,7 +25,7 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                     <div class="float-right">
                         <button type="button" class="btn btn-primary"><span class="oi oi-plus"></span> Category</button>
                         <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Image</button>
-                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Product</button>
+                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Product group</button>
                         <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Video</button>
                     </div>
                 </div>
@@ -50,30 +50,39 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="min-height: 100px;">
                                     <form>
                                         <h2>Category 1</h2>
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <div class="form-group">
-                                                    <label>Name</label>
-                                                    <input type="text" class="form-control" placeholder="Category name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Description</label>
-                                                    <textarea class="form-control" rows="2" placeholder="Category description"></textarea>
-                                                </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Name</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" class="form-control" placeholder="Example category name">
                                             </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label>Length</label>
-                                                    <input type="text" class="form-control" placeholder="Length">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Length</label>
-                                                    <input type="text" class="form-control" placeholder="Length">
-                                                </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" placeholder="Length">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" readonly class="form-control-plaintext" value="##CATEGORY_1_NAME##">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Description</label>
+                                            <div class="col-sm-5">
+                                                <textarea class="form-control" rows="2" placeholder="Example category description"></textarea>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" placeholder="Length">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" readonly class="form-control-plaintext" value="##CATEGORY_1_DESCRIPTION##">
                                             </div>
                                         </div>
                                         <hr>
-                                        Images<br/>
+                                        <h2>Image 1</h2>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Placeholder</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" readonly class="form-control-plaintext" value="##IMAGE_1##">
+                                            </div>
+                                        </div>
+                                        @for ($i = 0; $i < 2; $i++)
                                         @foreach ($images as $key => $image)
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" value="" id="image-{{ $key }}">
@@ -82,8 +91,15 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                                             </label>
                                         </div>
                                         @endforeach
+                                        @endfor
                                         <hr>
-                                        Videos<br/>
+                                        <h2>Video 1</h2>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Placeholder</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" readonly class="form-control-plaintext" value="##VIDEO_1##">
+                                            </div>
+                                        </div>
                                         @foreach ($videos as $key => $video)
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" value="" id="video-{{ $key }}">
@@ -95,49 +111,44 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                                         </div>
                                         @endforeach
                                         <hr>
-                                        <h2>Product items 1</h2>
-                                        <table class="table product_table">
-                                            <thead>
-                                                <tr>
-                                                    <th width="2%">Order</th>
-                                                    <th width="25%">Name</th>
-                                                    <th width="6%">Length</th>
-                                                    <th width="10%">Price</th>
-                                                    <th width="6%">Length</th>
-                                                    <th width="45%">Description</th>
-                                                    <th width="6%">Length</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="oi oi-move"></span></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Name"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Price"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Description"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="oi oi-move"></span></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Name"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Price"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Description"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="oi oi-move"></span></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Name"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Price"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Description"></td>
-                                                    <td class="form_td"><input type="text" class="form-control" placeholder="Length"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <h2>Product group 1</h2>
+                                        <h4>Product 1</h4>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Name</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" class="form-control" placeholder="Example name">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" placeholder="Length">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" readonly class="form-control-plaintext" value="##PRODUCT_1_NAME##">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Price</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" class="form-control" placeholder="Example price">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" placeholder="Length">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" readonly class="form-control-plaintext" value="##PRODUCT_1_PRICE##">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Description</label>
+                                            <div class="col-sm-5">
+                                                <textarea class="form-control" rows="2" placeholder="Example description"></textarea>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control" placeholder="Length">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="text" readonly class="form-control-plaintext" value="##PRODUCT_1_DESCRIPTION##">
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
@@ -151,30 +162,7 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-primary" id="save_menu_content">Generate placeholders</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 mt-2 d-none" id="placeholder_div">
-            <div class="card">
-                <div class="card-header">Placeholders</div>
-                <div class="card-body">
-                    <strong>Please find the placeholders:</strong>
-<pre>
-##CATEGORY_1_NAME##
-##CATEGORY_1_DESCRIPTION##
-##CATEGORY_1_IMAGE##
-##CATEGORY_1_VIDEO##
-##PRODUCT_ITEMS_1_NAME_1##
-##PRODUCT_ITEMS_1_PRICE_1##
-##PRODUCT_ITEMS_1_DESCRIPTION_1##
-##PRODUCT_ITEMS_1_NAME_2##
-##PRODUCT_ITEMS_1_PRICE_2##
-##PRODUCT_ITEMS_1_DESCRIPTION_2##
-##PRODUCT_ITEMS_1_NAME_3##
-##PRODUCT_ITEMS_1_PRICE_3##
-##PRODUCT_ITEMS_1_DESCRIPTION_3##
-</pre>
+                    <button type="button" class="btn btn-primary" id="save_menu_content">Save</button>
                 </div>
             </div>
         </div>
