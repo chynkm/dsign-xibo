@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @php
-$images = ['img_burritos_rough.png', 'img_desert_brownie.png', 'img_desert_churros.png', 'img_desert_cookie.png', 'img_fajitas_rough.png', 'img_nachos_rough.png',];
-$videos = ['sunrise.mp4', 'water.mp4',];
 @endphp
 
 @section('content')
@@ -15,6 +13,9 @@ $videos = ['sunrise.mp4', 'water.mp4',];
   padding-left: 15px;
   padding-top: 5px;
 }
+.tab_content {
+  min-height: 100px;
+}
 </style>
 <div class="container">
     <div class="row justify-content-center">
@@ -23,10 +24,10 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                 <div class="card-header">
                     Admin section
                     <div class="float-right">
-                        <button type="button" class="btn btn-primary"><span class="oi oi-plus"></span> Category</button>
-                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Image</button>
-                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Product group</button>
-                        <button type="button" class="btn btn-primary ml-1"><span class="oi oi-plus"></span> Video</button>
+                        <button type="button" class="btn btn-primary" id="insert_category"><span class="oi oi-plus"></span> Category</button>
+                        <button type="button" class="btn btn-primary ml-1" id="insert_image"><span class="oi oi-plus"></span> Image</button>
+                        <button type="button" class="btn btn-primary ml-1" id="insert_product_group"><span class="oi oi-plus"></span> Product group</button>
+                        <button type="button" class="btn btn-primary ml-1" id="insert_video"><span class="oi oi-plus"></span> Video</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -47,108 +48,8 @@ $videos = ['sunrise.mp4', 'water.mp4',];
                                 </li>
                             </ul>
                             <div class="tab-content pt-2" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="min-height: 100px;">
-                                    <form>
-                                        <h2>Category 1</h2>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Name</label>
-                                            <div class="col-sm-5">
-                                                <input type="text" class="form-control" placeholder="Example category name">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control" placeholder="Length">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" readonly class="form-control-plaintext" value="##CATEGORY_1_NAME##">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Description</label>
-                                            <div class="col-sm-5">
-                                                <textarea class="form-control" rows="2" placeholder="Example category description"></textarea>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control" placeholder="Length">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" readonly class="form-control-plaintext" value="##CATEGORY_1_DESCRIPTION##">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h2>Image 1</h2>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Placeholder</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" value="##IMAGE_1##">
-                                            </div>
-                                        </div>
-                                        @for ($i = 0; $i < 2; $i++)
-                                        @foreach ($images as $key => $image)
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="" id="image-{{ $key }}">
-                                            <label class="form-check-label" for="image-{{ $key }}">
-                                                <img src="img/{{ $image }}" alt="{{ $image }}" width="100px" class="img-thumbnail float-left">
-                                            </label>
-                                        </div>
-                                        @endforeach
-                                        @endfor
-                                        <hr>
-                                        <h2>Video 1</h2>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Placeholder</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control-plaintext" value="##VIDEO_1##">
-                                            </div>
-                                        </div>
-                                        @foreach ($videos as $key => $video)
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" value="" id="video-{{ $key }}">
-                                            <label class="form-check-label" for="video-{{ $key }}">
-                                                <video width="150" controls>
-                                                    <source src="video/{{ $video }}" type="video/mp4">
-                                                </video>
-                                            </label>
-                                        </div>
-                                        @endforeach
-                                        <hr>
-                                        <h2>Product group 1</h2>
-                                        <h4>Product 1</h4>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Name</label>
-                                            <div class="col-sm-5">
-                                                <input type="text" class="form-control" placeholder="Example name">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control" placeholder="Length">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" readonly class="form-control-plaintext" value="##PRODUCT_1_NAME##">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Price</label>
-                                            <div class="col-sm-5">
-                                                <input type="text" class="form-control" placeholder="Example price">
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control" placeholder="Length">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" readonly class="form-control-plaintext" value="##PRODUCT_1_PRICE##">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Description</label>
-                                            <div class="col-sm-5">
-                                                <textarea class="form-control" rows="2" placeholder="Example description"></textarea>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input type="text" class="form-control" placeholder="Length">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <input type="text" readonly class="form-control-plaintext" value="##PRODUCT_1_DESCRIPTION##">
-                                            </div>
-                                        </div>
+                                <div class="tab_content tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <form id="zone_1">
                                     </form>
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
@@ -177,13 +78,110 @@ $(function() {
 var APP = APP || {};
 
 APP.design = {
+    categoryCount: 1,
+    imageCount: 1,
+    videoCount: 1,
+    productGroupCount: 1,
+    productCount: 1,
     init: function() {
-        this.saveContent();
+        // this.saveContent();
+        this.insertCategory();
+        this.insertImage();
+        this.insertVideo();
+        this.insertProductGroup();
+        this.insertProduct();
+        this.fieldPresence();
+        this.delete();
     },
 
     saveContent: function() {
         $('#save_menu_content').click(function() {
             $('#placeholder_div').removeClass('d-none');
+        });
+    },
+
+    insertCategory: function() {
+        var self = this;
+        $('#insert_category').click(function() {
+            $.getJSON("{{ route('category') }}", { count: self.categoryCount })
+                .done(function(json) {
+                    $('#zone_1').append(json.html);
+                    self.categoryCount++;
+                });
+        });
+    },
+
+    insertImage: function() {
+        var self = this;
+        $('#insert_image').click(function() {
+            $.getJSON("{{ route('image') }}", { count: self.imageCount })
+                .done(function(json) {
+                    $('#zone_1').append(json.html);
+                    self.imageCount++;
+                });
+        });
+    },
+
+    insertVideo: function() {
+        var self = this;
+        $('#insert_video').click(function() {
+            $.getJSON("{{ route('video') }}", { count: self.videoCount })
+                .done(function(json) {
+                    $('#zone_1').append(json.html);
+                    self.videoCount++;
+                });
+        });
+    },
+
+    insertProductGroup: function() {
+        var self = this;
+        $('#insert_product_group').click(function() {
+            $.getJSON("{{ route('productGroup') }}", { count: self.productGroupCount })
+                .done(function(json) {
+                    $('#zone_1').append(json.html);
+                    $('#zone_1').find(`[data-product-group='${self.productGroupCount}']`).click();
+                    self.productGroupCount++;
+                });
+        });
+    },
+
+    insertProduct: function() {
+        var self = this;
+        $.ajaxSetup({async:false});
+        $(document).on('click', '.add_product', function() {
+            var productGroup = $(this).data('product-group');
+            $.getJSON("{{ route('product') }}", {
+                    product_group: productGroup,
+                    count: self.productCount
+                })
+                .done(function(json) {
+                    $('#product_'+productGroup).append(json.html);
+                    self.productCount++;
+                });
+        });
+    },
+
+    fieldPresence: function() {
+        var self = this;
+        $(document).on('click', '.field_presence', function() {
+            if ($(this).is(':checked')) {
+                $(this).closest('.row')
+                    .find('input, textarea')
+                    .val('')
+                    .prop('disabled', false);
+            } else {
+                $(this).closest('.row')
+                    .find('input, textarea')
+                    .not(this)
+                    .val('')
+                    .prop('disabled', true);
+            }
+        });
+    },
+
+    delete: function() {
+        $(document).on('click', '.za_delete', function() {
+            $(this).closest('.za_section').remove();
         });
     },
 };
